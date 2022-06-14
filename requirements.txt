@@ -1,1 +1,5 @@
 Pillow==9.1.1
+altgraph==0.17.2
+pyinstaller==5.1
+pyinstaller-hooks-contrib==2022.7
+tk==0.1.0
