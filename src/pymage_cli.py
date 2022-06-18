@@ -1,7 +1,8 @@
-import os, sys
+import sys
 from pathlib import Path
+from os import path
 import argparse
-from resizer import resize
+from resizer import resizeImages
 
 class PymageCLI:
   CLI_VERSION = 'Pymage CLI 1.0.0'
@@ -12,7 +13,7 @@ class PymageCLI:
   def __run(self):
     self.parser = argparse.ArgumentParser(
       prog="pymage",
-      usage="pymage [image_file] [-f] [-w] [-q]",
+      usage="pymage [image_files] [-f] [-w] [-q]",
       epilog="Enjoy the program! :)",
       formatter_class=argparse.RawDescriptionHelpFormatter
     )
@@ -23,24 +24,24 @@ class PymageCLI:
 -q --quality       Set the output image quality | -q 100
 -v --version       Print version info
     ''')
-    self.parser.add_argument("image_file", type=Path, help=argparse.SUPPRESS)
-    self.parser.add_argument("-w", "--width", type=int, nargs='*', help=argparse.SUPPRESS, dest='')
-    self.parser.add_argument("-f", "--format", type=str, nargs='*', help=argparse.SUPPRESS, dest='')
-    self.parser.add_argument("-q", "--quality", type=int, nargs='?', help=argparse.SUPPRESS, dest='')
+    self.parser.add_argument("image_file", type=Path, nargs='*', help=argparse.SUPPRESS)
+    self.parser.add_argument("-w", "--width", type=str, nargs='*', help=argparse.SUPPRESS, dest='widths')
+    self.parser.add_argument("-f", "--format", type=str, nargs='*', help=argparse.SUPPRESS, dest='formats')
+    self.parser.add_argument("-q", "--quality", type=int, nargs='?', help=argparse.SUPPRESS, dest='quality')
     self.parser.add_argument("-v", "--version", action="version", help=argparse.SUPPRESS, dest='')
 
     parser_args = self.parser.parse_args()
 
     if parser_args:
       try:
-        if os.path.exists(parser_args.file_path):
-          #resize()
-          print(os.path.abspath(parser_args.file_path))
-          print(parser_args)
-        else:
-          raise Exception("file not found")
+        resizeImages(
+          images=parser_args.image_file,
+          widths=parser_args.widths,
+          quality=parser_args.quality,
+          formats=parser_args.formats
+        )
       except Exception as e:
-        print("Inválid argument: {}".format(e))
+        print("Invalid argument: {}".format(e))
         sys.exit(1)
     else:
       self.parser.print_help()
