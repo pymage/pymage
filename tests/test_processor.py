@@ -1,5 +1,5 @@
 from os import path
-from src.pymage.processor import process_image
+from src.pymage.processor import ImagesProcessor
 from PIL import Image
 import pytest
 import shutil
@@ -16,12 +16,12 @@ def run_around_tests():
 
 
 def test_process_image_one_size_same_format():
-    process_image(
-        image="./tests/images/mountain.jpg",
+    ImagesProcessor(
+        images=["./tests/images/mountain.jpg"],
         formats=["jpg"],
         quality=100,
         widths=[320]
-    )
+    ).process()
 
     resized_image_path = './tests/images/mountain/mountain_320.jpg'
     resized_image = Image.open(resized_image_path)
@@ -32,12 +32,12 @@ def test_process_image_one_size_same_format():
 
 
 def test_process_image_multiple_sizes_same_format():
-    process_image(
-        image="./tests/images/mountain.jpg",
+    ImagesProcessor(
+        images=["./tests/images/mountain.jpg"],
         formats=["jpg"],
         quality=100,
         widths=[320, 640, 960]
-    )
+    ).process()
 
     # 320px width image
     resized_image_320_path = './tests/images/mountain/mountain_320.jpg'
@@ -69,12 +69,12 @@ def test_process_image_multiple_sizes_same_format():
 
 
 def test_process_image_one_size_changing_format():
-    process_image(
-        image="./tests/images/mountain.jpg",
+    ImagesProcessor(
+        images=["./tests/images/mountain.jpg"],
         formats=["webp"],
         quality=100,
         widths=[320]
-    )
+    ).process()
 
     resized_image_path = './tests/images/mountain/mountain_320.webp'
     resized_image = Image.open(resized_image_path)
@@ -85,12 +85,12 @@ def test_process_image_one_size_changing_format():
 
 
 def test_process_image_one_size_changing_to_multiple_formats():
-    process_image(
-        image="./tests/images/mountain.jpg",
+    ImagesProcessor(
+        images=["./tests/images/mountain.jpg"],
         formats=["jpeg", "webp", "png"],
         quality=100,
         widths=[320]
-    )
+    ).process()
 
     # JPEG image
     resized_image_jpeg_path = './tests/images/mountain/mountain_320.jpeg'
