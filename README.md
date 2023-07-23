@@ -2,11 +2,12 @@
   <img src="./doc/img/pymage.png" height="400" />
 </p>
 
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
 ## Give a Star! :star:
 If you liked my work and want to support me, please give it a star. Thanks!
 
----
-## The problem 
+## 1. The problem 
 When I was starting at the IT area, I pick up some website building projects and then I recognize that performance is a really good issue to improove the amout of leads at your site.
 
 When we are talking about website performance one of the most important thing is the images, images can be a really good vilain because in some scenarious we use a bad format or a incorrect size.
@@ -15,16 +16,66 @@ Ideally, we shoud have a single image in some low-size format like WEBP and a co
 
 So, to have a performance optimized website we should have each userd image in multiples formats and sizes.
 
-## Resolution
+## 2. What Pymage do?
 That project was created with the objective to make that process of resize and reformat images easier, with a single command, you create some versions with different sizes and formats from an image. 
 
+## 3. Features :bulb:
+- Resize images.
+- Generate images with multiple sizes
+- Change image format
+- Generate images with multiple formats
+- Change image quality
 
-## Running as DEV
-#### Installing Virtualenv:
-- `sudo pip3 install virtualenv`
-- `mkdir venv`
-- `which python3`
-- `virtualenv --python='/path/to/python3' venv`
-- `source venv/bin/activate`
-- *To stop the virtual environment run:* `deactivate`
-- *Top remove all dependencies run:* `rm -r venv`
+## 4. Running Tests 🧪
+
+To run tests, run the following command
+
+```bash
+  source venv/bin/activate
+  pip install -r requirements_dev.txt
+  pytest -s
+```
+
+## Run Locally :rocket:
+
+Clone the project
+
+```bash
+  git clone https://github.com/pymage/pymage.git
+  OR
+  git clone git@github.com:pymage/pymage.git
+```
+
+Go to the project directory
+
+```bash
+  cd pymage
+```
+
+Install and run virtualenv
+```bash
+  sudo pip3 install virtualenv
+  mkdir venv
+  which python3
+  virtualenv --python='/path/to/python3' venv
+  source venv/bin/activate
+```
+
+Install  dependencies
+```bash
+  pip install -r requirements.txt
+```
+
+<!-- Running
+```bash
+  python pymage
+``` -->
+
+
+*To stop the virtual environment run:* `deactivate`
+*Top remove all dependencies run:* `rm -r venv`
+
+---
+## Feedback :memo:
+
+If you have any feedback, please reach out to us at rodrigo.martins7121@gmail.com
