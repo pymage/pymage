@@ -1,5 +1,5 @@
 from os import path
-from pymage.processor import process_image
+from src.pymage.processor import process_image
 from PIL import Image
 import pytest
 import shutil
