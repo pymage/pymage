@@ -1,12 +1,18 @@
 from os import path, mkdir
 from PIL import Image
+from typing import List
 
 
-def resizeImages(images, widths, quality, formats):
+def process_images(
+    images: List[str],
+    widths: List[float] = [300, 500, 750],
+    quality: float = 100,
+    formats: List[str] = ['jpeg']
+):
     for image in images:
         try:
             if path.exists(image):
-                resize(image, widths, quality, formats)
+                process_image(image, widths, quality, formats)
             else:
                 raise RuntimeError('Image %(image)s not found' % {'image': image})
         except RuntimeError as e:
@@ -16,7 +22,12 @@ def resizeImages(images, widths, quality, formats):
             print('Something went wrong -.-\'')
 
 
-def resize(image, widths, quality, formats):
+def process_image(
+    image: str,
+    widths: List[float] = [300, 500, 750],
+    quality: float = 100,
+    formats: List[str] = ['jpeg']
+):
     widths = widths or [300, 500, 750]
     quality = quality or 100
     formats = formats or ['jpeg']

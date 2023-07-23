@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 import argparse
-from resizer import resizeImages
+from pymage.processor import process_images
 
 
 class PymageCLI:
@@ -33,7 +33,7 @@ class PymageCLI:
 
         if parser_args:
             try:
-                resizeImages(
+                process_images(
                     images=parser_args.image_file,
                     widths=parser_args.widths,
                     quality=parser_args.quality,
