@@ -1,4 +1,4 @@
-Pillow==9.1.1
+Pillow==9.2.0
 altgraph==0.17.2
 pyinstaller==5.1
 pyinstaller-hooks-contrib==2022.7
