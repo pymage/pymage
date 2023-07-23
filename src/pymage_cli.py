@@ -1,6 +1,5 @@
 import sys
 from pathlib import Path
-from os import path
 import argparse
 from resizer import resizeImages
 
@@ -25,7 +24,7 @@ class PymageCLI:
 -v --version       Print version info
     ''')
     self.parser.add_argument("image_file", type=Path, nargs='*', help=argparse.SUPPRESS)
-    self.parser.add_argument("-w", "--width", type=str, nargs='*', help=argparse.SUPPRESS, dest='widths')
+    self.parser.add_argument("-w", "--width", type=int, nargs='*', help=argparse.SUPPRESS, dest='widths')
     self.parser.add_argument("-f", "--format", type=str, nargs='*', help=argparse.SUPPRESS, dest='formats')
     self.parser.add_argument("-q", "--quality", type=int, nargs='?', help=argparse.SUPPRESS, dest='quality')
     self.parser.add_argument("-v", "--version", action="version", help=argparse.SUPPRESS, dest='')
