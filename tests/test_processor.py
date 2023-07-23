@@ -15,7 +15,7 @@ def run_around_tests():
     shutil.rmtree('./tests/images/mountain')
 
 
-def test_resize_one_size_same_format():
+def test_process_image_one_size_same_format():
     process_image(
         image="./tests/images/mountain.jpg",
         formats=["jpg"],
@@ -31,7 +31,7 @@ def test_resize_one_size_same_format():
     assert resized_image.get_format_mimetype() == "image/jpeg"
 
 
-def test_resize_multiple_sizes_same_format():
+def test_process_image_multiple_sizes_same_format():
     process_image(
         image="./tests/images/mountain.jpg",
         formats=["jpg"],
@@ -68,7 +68,7 @@ def test_resize_multiple_sizes_same_format():
     assert resized_image_960.get_format_mimetype() == "image/jpeg"
 
 
-def test_resize_one_size_changing_format():
+def test_process_image_one_size_changing_format():
     process_image(
         image="./tests/images/mountain.jpg",
         formats=["webp"],
@@ -84,7 +84,7 @@ def test_resize_one_size_changing_format():
     assert resized_image.get_format_mimetype() == "image/webp"
 
 
-def test_resize_one_size_changing_to_multiple_formats():
+def test_process_image_one_size_changing_to_multiple_formats():
     process_image(
         image="./tests/images/mountain.jpg",
         formats=["jpeg", "webp", "png"],
