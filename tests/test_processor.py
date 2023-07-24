@@ -4,6 +4,7 @@ from PIL import Image
 import pytest
 import shutil
 
+
 @pytest.fixture(autouse=True)
 def run_around_tests():
     # Setup
@@ -50,7 +51,6 @@ def test_process_image_multiple_sizes_same_format():
     # 960px width image
     resized_image_960_path = './tests/images/mountain/mountain_960.jpg'
     resized_image_960 = Image.open(resized_image_960_path)
-
 
     # 320px width image
     assert path.exists(resized_image_320_path) is True
@@ -103,7 +103,6 @@ def test_process_image_one_size_changing_to_multiple_formats():
     # PNG image
     resized_image_png_path = './tests/images/mountain/mountain_320.png'
     resized_image_png = Image.open(resized_image_png_path)
-
 
     assert path.exists(resized_image_jpeg_path) is True
     assert resized_image_jpeg.size[0] == 320

@@ -16,7 +16,6 @@ class ImagesProcessor:
         self.formats = formats
         self.quality = quality
 
-    
     def process(self):
         for image in self.images:
             try:
@@ -24,7 +23,6 @@ class ImagesProcessor:
             except Exception as e:
                 print(e)
                 print('Something went wrong -.-\'')
-
 
     def __process_image(
         self,
@@ -52,7 +50,6 @@ class ImagesProcessor:
                     img_output_path = path.join(img_output_dir, output_filename)
                     resized_img.save(img_output_path, extension=format, quality=quality)
 
-
     def __resize_image(self, image, width):
         img_width = float(image.size[0])
         img_height = float(image.size[1])
@@ -60,7 +57,6 @@ class ImagesProcessor:
         new_image_height = int(img_height * width_percent)
 
         return image.resize((width, new_image_height), resample=Image.BICUBIC)
-
 
     def __create_output_dir(self, output_dir: str, file_name: str):
         img_output_dir = path.join(output_dir, file_name)
@@ -71,7 +67,6 @@ class ImagesProcessor:
 
         return img_output_dir
 
-            
     def __get_valid_images_paths(self, images_paths: List[str]):
         existent_images = []
 
