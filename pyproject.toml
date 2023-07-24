@@ -3,9 +3,8 @@ requires = ["setuptools>=42.0", "wheel"]
 build-backend = "setuptolls.build_meta"
 
 [toll.pytest.ini_options]
-addopts = "--conv=pymage"
 testpaths = [
-    "tests",
+    "tests"
 ]
 
 [tool.mypy]
