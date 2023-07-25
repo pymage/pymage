@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 import argparse
-from pymage.processor import ImagesProcessor
+from processor import ImagesProcessor
 
 
 class PymageCLI:
@@ -18,10 +18,10 @@ class PymageCLI:
             formatter_class=argparse.RawDescriptionHelpFormatter
         )
         self.parser.add_argument_group(title="args", description='''
--f --format        Set the output image formats | -f webp jpeg
--w --width         Set the output image sizes   | -w 300 600 900
--q --quality       Set the output image quality | -q 100
--v --version       Print version info
+-f --format   Set the output image formats | -f webp jpeg
+-w --width    Set the output image sizes   | -w 300 600 900
+-q --quality  Set the output image quality | -q 100
+-v --version  Print version info
         ''')
         self.parser.add_argument("image_file", type=Path, nargs='*', help=argparse.SUPPRESS)
         self.parser.add_argument("-w", "--width", type=int, nargs='*', help=argparse.SUPPRESS, dest='widths')
