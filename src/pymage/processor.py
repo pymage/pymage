@@ -56,7 +56,7 @@ class ImagesProcessor:
         width_percent = float(width / img_width)
         new_image_height = int(img_height * width_percent)
 
-        return image.resize((width, new_image_height), resample=Image.BICUBIC)
+        return image.resize((width, new_image_height), resample=Image.Resampling.BICUBIC)
 
     def __create_output_dir(self, output_dir: str, file_name: str):
         img_output_dir = path.join(output_dir, file_name)
