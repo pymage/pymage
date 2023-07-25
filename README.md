@@ -26,6 +26,66 @@ That project was created with the objective to make that process of resize and r
 - Generate images with multiple formats
 - Change image quality
 
+## 4. Run Locally :rocket:
+
+**Clone the project**
+
+```bash
+  git clone https://github.com/pymage/pymage.git
+  OR
+  git clone git@github.com:pymage/pymage.git
+```
+
+**Go to the project directory**
+
+```bash
+  cd pymage
+```
+
+**Install and run virtualenv**
+```bash
+  sudo pip3 install virtualenv
+  mkdir venv
+  which python3
+  virtualenv --python='/path/to/python3' venv
+  source venv/bin/activate
+```
+
+**Install dependencies**
+```bash
+  pip install -r requirements.txt
+```
+
+**Running**
+```bash
+  python src/pymage [pathToImage] -f [formats] -w [sizes] -q [quality]
+```
+
+**Commands**
+```bash
+  # Help!
+  python src/pymage --help
+
+  # Output
+  usage: pymage [image_files] [-f] [-w] [-q]
+
+  optional arguments:
+    -h, --help  show this help message and exit
+
+  args:
+    
+    -f --format   Set the output image formats | -f webp jpeg
+    -w --width    Set the output image sizes   | -w 300 600 900
+    -q --quality  Set the output image quality | -q 100
+    -v --version  Print version info
+            
+
+  Enjoy the program! :)
+```
+
+*To stop the virtual environment run:* `deactivate`
+*Top remove all dependencies run:* `rm -r venv`
+
 ## 4. Running Tests 🧪
 
 To run tests, run the following command
@@ -35,45 +95,6 @@ To run tests, run the following command
   pip install -r requirements_dev.txt
   pytest -s
 ```
-
-## Run Locally :rocket:
-
-Clone the project
-
-```bash
-  git clone https://github.com/pymage/pymage.git
-  OR
-  git clone git@github.com:pymage/pymage.git
-```
-
-Go to the project directory
-
-```bash
-  cd pymage
-```
-
-Install and run virtualenv
-```bash
-  sudo pip3 install virtualenv
-  mkdir venv
-  which python3
-  virtualenv --python='/path/to/python3' venv
-  source venv/bin/activate
-```
-
-Install  dependencies
-```bash
-  pip install -r requirements.txt
-```
-
-<!-- Running
-```bash
-  python pymage
-``` -->
-
-
-*To stop the virtual environment run:* `deactivate`
-*Top remove all dependencies run:* `rm -r venv`
 
 ---
 ## Feedback :memo:
