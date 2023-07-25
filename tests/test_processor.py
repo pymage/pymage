@@ -115,3 +115,69 @@ def test_process_image_one_size_changing_to_multiple_formats():
     assert path.exists(resized_image_png_path) is True
     assert resized_image_png.size[0] == 320
     assert resized_image_png.get_format_mimetype() == "image/png"
+
+
+def test_process_image_without_quality():
+    ImagesProcessor(
+        images=["./tests/images/mountain.jpg"],
+        formats=["jpg"],
+        widths=[320]
+    ).process()
+
+    resized_image_path = './tests/images/mountain/mountain_320.jpg'
+    resized_image = Image.open(resized_image_path)
+
+    assert path.exists(resized_image_path) is True
+    assert resized_image.size[0] == 320
+    assert resized_image.get_format_mimetype() == "image/jpeg"
+
+
+def test_process_image_without_format_generates_image_from_mimetype():
+    ImagesProcessor(
+        images=["./tests/images/mountain.jpg"],
+        quality=100,
+        widths=[320]
+    ).process()
+
+    resized_image_path = './tests/images/mountain/mountain_320.jpeg'
+    resized_image = Image.open(resized_image_path)
+
+    assert path.exists(resized_image_path) is True
+    assert resized_image.size[0] == 320
+    assert resized_image.get_format_mimetype() == "image/jpeg"
+
+
+def test_process_image_without_width_generates_images_of_300px_500px_750px():
+    ImagesProcessor(
+        images=["./tests/images/mountain.jpg"],
+        formats=["jpg"],
+        quality=100
+    ).process()
+
+    # 300px width image
+    resized_image_300_path = './tests/images/mountain/mountain_300.jpg'
+    resized_image_300 = Image.open(resized_image_300_path)
+
+    # 500px width image
+    resized_image_500_path = './tests/images/mountain/mountain_500.jpg'
+    resized_image_500 = Image.open(resized_image_500_path)
+
+    # 750px width image
+    resized_image_750_path = './tests/images/mountain/mountain_750.jpg'
+    resized_image_750 = Image.open(resized_image_750_path)
+
+    # 300px width image
+    assert path.exists(resized_image_300_path) is True
+    assert resized_image_300.size[0] == 300
+    assert resized_image_300.get_format_mimetype() == "image/jpeg"
+
+    # 500px width image
+    assert path.exists(resized_image_500_path) is True
+    assert resized_image_500.size[0] == 500
+    assert resized_image_500.get_format_mimetype() == "image/jpeg"
+
+    # 750px width image
+    assert path.exists(resized_image_750_path) is True
+    assert resized_image_750.size[0] == 750
+    assert resized_image_750.get_format_mimetype() == "image/jpeg"
+

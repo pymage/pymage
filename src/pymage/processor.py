@@ -29,13 +29,18 @@ class ImagesProcessor:
         image: str,
         widths: List[float] = [300, 500, 750],
         quality: float = 100,
-        formats: List[str] = ['jpeg']
+        formats: List[str] = None
     ):
         image_absolute_path = path.realpath(image)
         output_dir = path.dirname(image_absolute_path)
         file_name = path.splitext(path.basename(image_absolute_path))[0]
 
         with Image.open(image_absolute_path) as img:
+            if not formats:
+                image_mimetype = img.get_format_mimetype()
+                image_format = image_mimetype.split('/')[1]
+                formats = [image_format]
+
             for width in widths:
                 resized_img = self.__resize_image(img, width)
 
