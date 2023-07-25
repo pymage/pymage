@@ -7,14 +7,14 @@ class ImagesProcessor:
     def __init__(
         self,
         images: List[str],
-        widths: List[float] = [300, 500, 750],
-        formats: List[str] = ['jpeg'],
-        quality: float = 100
+        widths: List[float],
+        formats: List[str],
+        quality: float
     ):
         self.images = self.__get_valid_images_paths(images)
-        self.widths = widths
+        self.widths = widths or [300, 500, 750]
         self.formats = formats
-        self.quality = quality
+        self.quality = quality or 100
 
     def process(self):
         for image in self.images:
@@ -27,9 +27,9 @@ class ImagesProcessor:
     def __process_image(
         self,
         image: str,
-        widths: List[float] = [300, 500, 750],
-        quality: float = 100,
-        formats: List[str] = None
+        widths: List[float],
+        quality: float,
+        formats: List[str]
     ):
         image_absolute_path = path.realpath(image)
         output_dir = path.dirname(image_absolute_path)

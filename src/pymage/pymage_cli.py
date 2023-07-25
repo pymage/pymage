@@ -1,6 +1,6 @@
 import sys
-from pathlib import Path
 import argparse
+from pathlib import Path
 from processor import ImagesProcessor
 
 
