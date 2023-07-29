@@ -6,10 +6,10 @@ from typing import List
 class ImagesProcessor:
     def __init__(
         self,
-        images: List[str],
-        widths: List[float],
-        formats: List[str],
-        quality: float
+        images: List[str] = [],
+        widths: List[float] = [],
+        formats: List[str] = [],
+        quality: float = 100
     ):
         self.images = self.__get_valid_images_paths(images)
         self.widths = widths or [300, 500, 750]
