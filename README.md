@@ -58,7 +58,7 @@ That project was created with the objective to make that process of resize and r
 
 **Running**
 ```bash
-  python src/pymage [pathToImage] -f [formats] -w [sizes] -q [quality]
+  python -m src.pymage [pathToImage] -f [formats] -w [sizes] -q [quality]
 ```
 
 **Commands**
