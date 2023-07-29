@@ -31,6 +31,6 @@ jobs:
 
     - name: Upload para o PyPI
       env:
-        TWINE_USERNAME: __token__  # Substitua "__token__" pelo seu token do PyPI (gerado no pypi.org)
-        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}  # Cria um secret chamado "PYPI_TOKEN" com o seu token do PyPI
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
       run: python -m twine upload --skip-existing dist/*
