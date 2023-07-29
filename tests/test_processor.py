@@ -180,4 +180,3 @@ def test_process_image_without_width_generates_images_of_300px_500px_750px():
     assert path.exists(resized_image_750_path) is True
     assert resized_image_750.size[0] == 750
     assert resized_image_750.get_format_mimetype() == "image/jpeg"
-

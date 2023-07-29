@@ -7,9 +7,9 @@ class ImagesProcessor:
     def __init__(
         self,
         images: List[str],
-        widths: List[float] = None,
-        formats: List[str] = None,
-        quality: float = None
+        widths: List[float],
+        formats: List[str],
+        quality: float
     ):
         self.images = self.__get_valid_images_paths(images)
         self.widths = widths or [300, 500, 750]
