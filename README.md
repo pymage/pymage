@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="./doc/img/pymage.png" height="400" />
+  <img src="https://raw.githubusercontent.com/pymage/pymage/main/doc/img/pymage.png" height="400" />
 </p>
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-## Give a Star! :star:
+## Give a Star! ⭐
 If you liked my work and want to support me, please give it a star. Thanks!
 
 ## 1. The problem 
@@ -19,14 +19,18 @@ So, to have a performance optimized website we should have each userd image in m
 ## 2. What Pymage do?
 That project was created with the objective to make that process of resize and reformat images easier, with a single command, you create some versions with different sizes and formats from an image. 
 
-## 3. Features :bulb:
+## 3. Features 💡
 - Resize images.
 - Generate images with multiple sizes
 - Change image format
 - Generate images with multiple formats
 - Change image quality
 
-## 4. Run Locally :rocket:
+## 4. Install 📕
+
+
+
+## 5. Run Locally 🚀
 
 **Clone the project**
 
@@ -86,7 +90,7 @@ That project was created with the objective to make that process of resize and r
 *To stop the virtual environment run:* `deactivate`
 *Top remove all dependencies run:* `rm -r venv`
 
-## 4. Running Tests 🧪
+## 6. Running Tests 🧪
 
 To run tests, run the following command
 
@@ -96,7 +100,5 @@ To run tests, run the following command
   pytest -s
 ```
 
----
-## Feedback :memo:
-
-If you have any feedback, please reach out to us at rodrigo.martins7121@gmail.com
+## 7. Suport and Bugs Report 🚨
+If you found a bug, have a feature need, feedback or doubt, just open a issue.
