@@ -1,7 +1,7 @@
 import sys
 import argparse
 from pathlib import Path
-from processor import ImagesProcessor
+from .processor import ImagesProcessor
 
 
 class PymageCLI:
@@ -31,7 +31,10 @@ class PymageCLI:
 
         parser_args = self.parser.parse_args()
 
-        if parser_args:
+        if not any(vars(parser_args).values()):
+            self.parser.print_help()
+            sys.exit(1)
+        else:
             try:
                 images_processor = ImagesProcessor(
                     images=parser_args.image_file,
@@ -44,6 +47,3 @@ class PymageCLI:
             except Exception as e:
                 print("Invalid argument: {}".format(e))
                 sys.exit(1)
-        else:
-            self.parser.print_help()
-            sys.exit(1)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from pymage_cli import PymageCLI
+from .cli import PymageCLI
 
 
 def main() -> None:
