@@ -1,0 +1,33 @@
+name: Deploy to PyPI
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout código-fonte
+      uses: actions/checkout@v2
+
+    - name: Configura ambiente Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Instala dependências
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install build twine
+
+    - name: Build do pacote
+      run: python -m build
+
+    - name: Upload para o PyPI
+      env:
+        TWINE_USERNAME: __token__  # Substitua "__token__" pelo seu token do PyPI (gerado no pypi.org)
+        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}  # Cria um secret chamado "PYPI_TOKEN" com o seu token do PyPI
+      run: python -m twine upload --skip-existing dist/*
