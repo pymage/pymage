@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/pymage/pymage/main/doc/img/pymage.png" height="400" />
+  <img src="https://raw.githubusercontent.com/pymage/pymage/main/docs/img/pymage.png" height="400" />
 </p>
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
@@ -26,9 +26,32 @@ That project was created with the objective to make that process of resize and r
 - Generate images with multiple formats
 - Change image quality
 
-## 4. Install 📕
+## 4. Using 📕
 
+**Install (Requires Python >= 3.8)**
+```bash
+  pip install pymage-processor
+```
 
+**Running**
+```bash
+  pymage
+```
+
+*If, when executing this command, you do not see the help command, refer to the item below.*
+
+**Problem running**
+The install process put the app in the ~/.local/bin directory so check if you have that directory in the PATH variable.
+
+You can do this by running this command, but you will need to put it in your .bashrc file or equivalent so you don't have to do it every time you open a new terminal
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+**Uninstall**
+```bash
+  pip uninstall pymage-processor
+```
 
 ## 5. Run Locally 🚀
 
