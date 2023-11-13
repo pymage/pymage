@@ -1,8 +1,10 @@
-from os import path
+from os import path, remove
 from src.pymage.processor import ImagesProcessor
 from PIL import Image
 import pytest
 import shutil
+import zipfile
+import contextlib
 
 
 @pytest.fixture(autouse=True)
@@ -14,6 +16,8 @@ def run_around_tests():
 
     # Teardown
     shutil.rmtree('./tests/images/mountain')
+    with contextlib.suppress(FileNotFoundError):
+        remove('./tests/images/mountain.zip')
 
 
 def test_process_image_one_size_same_format():
@@ -24,7 +28,7 @@ def test_process_image_one_size_same_format():
         widths=[320]
     ).process()
 
-    resized_image_path = './tests/images/mountain/mountain_320.jpg'
+    resized_image_path = './tests/images/mountain/mountain_320.jpeg'
     resized_image = Image.open(resized_image_path)
 
     assert path.exists(resized_image_path) is True
@@ -41,15 +45,15 @@ def test_process_image_multiple_sizes_same_format():
     ).process()
 
     # 320px width image
-    resized_image_320_path = './tests/images/mountain/mountain_320.jpg'
+    resized_image_320_path = './tests/images/mountain/mountain_320.jpeg'
     resized_image_320 = Image.open(resized_image_320_path)
 
     # 640px width image
-    resized_image_640_path = './tests/images/mountain/mountain_640.jpg'
+    resized_image_640_path = './tests/images/mountain/mountain_640.jpeg'
     resized_image_640 = Image.open(resized_image_640_path)
 
     # 960px width image
-    resized_image_960_path = './tests/images/mountain/mountain_960.jpg'
+    resized_image_960_path = './tests/images/mountain/mountain_960.jpeg'
     resized_image_960 = Image.open(resized_image_960_path)
 
     # 320px width image
@@ -124,7 +128,7 @@ def test_process_image_without_quality():
         widths=[320]
     ).process()
 
-    resized_image_path = './tests/images/mountain/mountain_320.jpg'
+    resized_image_path = './tests/images/mountain/mountain_320.jpeg'
     resized_image = Image.open(resized_image_path)
 
     assert path.exists(resized_image_path) is True
@@ -155,15 +159,15 @@ def test_process_image_without_width_generates_images_of_300px_500px_750px():
     ).process()
 
     # 300px width image
-    resized_image_300_path = './tests/images/mountain/mountain_300.jpg'
+    resized_image_300_path = './tests/images/mountain/mountain_300.jpeg'
     resized_image_300 = Image.open(resized_image_300_path)
 
     # 500px width image
-    resized_image_500_path = './tests/images/mountain/mountain_500.jpg'
+    resized_image_500_path = './tests/images/mountain/mountain_500.jpeg'
     resized_image_500 = Image.open(resized_image_500_path)
 
     # 750px width image
-    resized_image_750_path = './tests/images/mountain/mountain_750.jpg'
+    resized_image_750_path = './tests/images/mountain/mountain_750.jpeg'
     resized_image_750 = Image.open(resized_image_750_path)
 
     # 300px width image
@@ -180,3 +184,19 @@ def test_process_image_without_width_generates_images_of_300px_500px_750px():
     assert path.exists(resized_image_750_path) is True
     assert resized_image_750.size[0] == 750
     assert resized_image_750.get_format_mimetype() == "image/jpeg"
+
+def test_process_image_output_in_zip():
+    ImagesProcessor(
+        images=["./tests/images/mountain.jpg"],
+        formats=["jpeg", "webp", "png"],
+        quality=100,
+        widths=[320],
+        zip=True
+    ).process()
+
+    zip = zipfile.ZipFile('./tests/images/mountain.zip')
+    zipped_files = zip.namelist()
+
+    assert zipped_files[0] == 'mountain_320.jpeg'
+    assert zipped_files[1] == 'mountain_320.webp'
+    assert zipped_files[2] == 'mountain_320.png'

@@ -21,12 +21,14 @@ class PymageCLI:
 -f --format   Set the output image formats | -f webp jpeg
 -w --width    Set the output image sizes   | -w 300 600 900
 -q --quality  Set the output image quality | -q 100
+-z --zip      Zip output directory         | -z
 -v --version  Print version info
         ''')
         self.parser.add_argument("image_file", type=Path, nargs='*', help=argparse.SUPPRESS)
         self.parser.add_argument("-w", "--width", type=int, nargs='*', help=argparse.SUPPRESS, dest='widths')
         self.parser.add_argument("-f", "--format", type=str, nargs='*', help=argparse.SUPPRESS, dest='formats')
         self.parser.add_argument("-q", "--quality", type=int, nargs='?', help=argparse.SUPPRESS, dest='quality')
+        self.parser.add_argument("-z", "--zip", type=bool, nargs='?', help=argparse.SUPPRESS, dest='zip')
         self.parser.add_argument("-v", "--version", action="version", help=argparse.SUPPRESS, dest='')
 
         parser_args = self.parser.parse_args()
@@ -40,7 +42,8 @@ class PymageCLI:
                     images=parser_args.image_file,
                     widths=parser_args.widths,
                     quality=parser_args.quality,
-                    formats=parser_args.formats
+                    formats=parser_args.formats,
+                    zip=parser_args.zip
                 )
 
                 images_processor.process()
