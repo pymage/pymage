@@ -123,33 +123,28 @@ def test_process_image_one_size_changing_format():
 
 def test_process_image_one_size_changing_to_multiple_formats():
     ImagesProcessor(
-        input=["./images/mountain.jpg"],
+        input=[images_path / "mountain.jpg"],
         formats=["jpeg", "webp", "png"],
         quality=100,
         widths=[320]
     ).process()
 
-    # JPEG image
-    resized_image_jpeg_path = './images/output/mountain_320.jpeg'
-    resized_image_jpeg = Image.open(resized_image_jpeg_path)
-
-    # WEBP image
-    resized_image_webp_path = './images/output/mountain_320.webp'
-    resized_image_webp = Image.open(resized_image_webp_path)
-
-    # PNG image
-    resized_image_png_path = './images/output/mountain_320.png'
-    resized_image_png = Image.open(resized_image_png_path)
+    resized_image_jpeg_path = images_output_path / 'mountain_320.jpeg'
+    resized_image_webp_path = images_output_path / 'mountain_320.webp'
+    resized_image_png_path = images_output_path / 'mountain_320.png'
 
     assert path.exists(resized_image_jpeg_path) is True
+    resized_image_jpeg = Image.open(resized_image_jpeg_path)
     assert resized_image_jpeg.size[0] == 320
     assert resized_image_jpeg.get_format_mimetype() == "image/jpeg"
 
     assert path.exists(resized_image_webp_path) is True
+    resized_image_webp = Image.open(resized_image_webp_path)
     assert resized_image_webp.size[0] == 320
     assert resized_image_webp.get_format_mimetype() == "image/webp"
 
     assert path.exists(resized_image_png_path) is True
+    resized_image_png = Image.open(resized_image_png_path)
     assert resized_image_png.size[0] == 320
     assert resized_image_png.get_format_mimetype() == "image/png"
 
