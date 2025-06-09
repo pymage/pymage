@@ -18,13 +18,13 @@ class ImagesProcessor:
         self,
         input: Union[str, Path, List[Union[str, Path]]],
         output_dir_name: str = "output",
-        widths: List[int] = None,
-        formats: List[str] = None,
+        widths: List[int] = (300, 500, 750),
+        formats: List[str] = (),
         quality: int = 100
     ):
-        self.widths = widths or [300, 500, 750]
-        self.formats = formats or []
-        self.quality = quality or 100
+        self.widths = widths
+        self.formats = formats
+        self.quality = quality
 
         self.images = self.__get_valid_images(input)
         self.output_dir = self.__resolve_output_dir(input, output_dir_name)
