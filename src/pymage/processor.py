@@ -30,6 +30,7 @@ class ImagesProcessor:
                     image_path = futures[future]
                     try:
                         future.result()
+                        print("\n ================= \n saving image path: " + image_path + "\n")
                     except Exception as e:
                         print(f"Error processing {image_path}: {e}")
             except KeyboardInterrupt:
