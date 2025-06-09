@@ -3,7 +3,15 @@ from PIL import Image
 from typing import List, Union
 from pathlib import Path
 from tqdm import tqdm
-from concurrent.futures import ThreadPoolExecutor, as_completed, wait, FIRST_EXCEPTION
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import logging
+
+logging.basicConfig(
+    level=logging.DEBUG,  # ou INFO para menos verbosidade
+    format="%(asctime)s [%(levelname)s] %(message)s"
+)
+
+logger = logging.getLogger(__name__)
 
 class ImagesProcessor:
     def __init__(
@@ -28,9 +36,10 @@ class ImagesProcessor:
             try:
                 for future in tqdm(as_completed(futures), total=len(futures), desc="Processing images"):
                     image_path = futures[future]
+                    logger.debug(f"Processing image: {image_path}")
                     try:
                         future.result()
-                        print("\n ================= \n saving image path: " + image_path + "\n")
+                        logger.debug(f"process end: {image_path}")
                     except Exception as e:
                         print(f"Error processing {image_path}: {e}")
             except KeyboardInterrupt:
