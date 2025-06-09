@@ -3,7 +3,11 @@ from src.pymage.processor import ImagesProcessor
 from PIL import Image
 import pytest
 import shutil
+from pathlib import Path
 
+CURRENT_DIR = Path(__file__).parent
+images_path = CURRENT_DIR / "images"
+images_output_path = CURRENT_DIR / "images/output"
 
 @pytest.fixture(autouse=True)
 def run_around_tests():
@@ -11,26 +15,26 @@ def run_around_tests():
     yield
 
     # Teardown
-    if path.exists('./images/output'):
-        shutil.rmtree('./images/output')
+    if path.exists(images_output_path):
+        shutil.rmtree(images_output_path)
 
-    if path.exists('./output'):
-        shutil.rmtree('./output')
+    if path.exists(CURRENT_DIR / 'output'):
+        shutil.rmtree(CURRENT_DIR / 'output')
 
-    if path.exists('./custom_output'):
-        shutil.rmtree('./custom_output')
+    if path.exists(CURRENT_DIR / 'custom_output'):
+        shutil.rmtree(CURRENT_DIR / 'custom_output')
 
 
 def test_should_save_processed_images_in_custom_output_folder():
     ImagesProcessor(
-        input=["./images/"],
+        input=[images_path],
         output_dir_name="custom_output",
         formats=["jpg"],
         quality=100,
         widths=[320]
     ).process()
 
-    resized_image_path = './custom_output/mountain_320.jpeg'
+    resized_image_path = CURRENT_DIR / 'custom_output/mountain_320.jpeg'
 
     assert path.exists(resized_image_path) is True
     resized_image = Image.open(resized_image_path)
@@ -40,13 +44,13 @@ def test_should_save_processed_images_in_custom_output_folder():
 
 def test_process_images_from_folder():
     ImagesProcessor(
-        input=["./images/"],
+        input=[images_path],
         formats=["jpg"],
         quality=100,
         widths=[320]
     ).process()
 
-    resized_image_path = './output/mountain_320.jpeg'
+    resized_image_path = CURRENT_DIR / 'output/mountain_320.jpeg'
 
     assert path.exists(resized_image_path) is True
     resized_image = Image.open(resized_image_path)
@@ -56,13 +60,13 @@ def test_process_images_from_folder():
 
 def test_process_image_one_size_same_format():
     ImagesProcessor(
-        input=["./images/mountain.jpg"],
+        input=[images_path / "mountain.jpg"],
         formats=["jpg"],
         quality=100,
         widths=[320]
     ).process()
 
-    resized_image_path = './images/output/mountain_320.jpeg'
+    resized_image_path = images_output_path / 'mountain_320.jpeg'
 
     assert path.exists(resized_image_path) is True
     resized_image = Image.open(resized_image_path)
@@ -72,15 +76,15 @@ def test_process_image_one_size_same_format():
 
 def test_process_image_multiple_sizes_same_format():
     ImagesProcessor(
-        input=["./images/mountain.jpg"],
+        input=[images_path / "mountain.jpg"],
         formats=["jpg"],
         quality=100,
         widths=[320, 640, 960]
     ).process()
 
-    resized_image_320_path = './images/output/mountain_320.jpeg'
-    resized_image_640_path = './images/output/mountain_640.jpeg'
-    resized_image_960_path = './images/output/mountain_960.jpeg'
+    resized_image_320_path = images_output_path / 'mountain_320.jpeg'
+    resized_image_640_path = images_output_path / 'mountain_640.jpeg'
+    resized_image_960_path = images_output_path / 'mountain_960.jpeg'
 
     # 320px width image
     assert path.exists(resized_image_320_path) is True
@@ -103,13 +107,13 @@ def test_process_image_multiple_sizes_same_format():
 
 def test_process_image_one_size_changing_format():
     ImagesProcessor(
-        input=["./images/mountain.jpg"],
+        input=[images_path / "mountain.jpg"],
         formats=["webp"],
         quality=100,
         widths=[320]
     ).process()
 
-    resized_image_path = './images/output/mountain_320.webp'
+    resized_image_path = images_output_path / 'mountain_320.webp'
 
     assert path.exists(resized_image_path) is True
     resized_image = Image.open(resized_image_path)
@@ -152,12 +156,12 @@ def test_process_image_one_size_changing_to_multiple_formats():
 
 def test_process_image_without_quality():
     ImagesProcessor(
-        input=["./images/mountain.jpg"],
+        input=[images_path / "mountain.jpg"],
         formats=["jpg"],
         widths=[320]
     ).process()
 
-    resized_image_path = './images/output/mountain_320.jpeg'
+    resized_image_path = images_output_path / 'mountain_320.jpeg'
 
     assert path.exists(resized_image_path) is True
     resized_image = Image.open(resized_image_path)
@@ -167,12 +171,12 @@ def test_process_image_without_quality():
 
 def test_process_image_without_format_generates_image_from_mimetype():
     ImagesProcessor(
-        input=["./images/mountain.jpg"],
+        input=[images_path / "mountain.jpg"],
         quality=100,
         widths=[320]
     ).process()
 
-    resized_image_path = './images/output/mountain_320.jpeg'
+    resized_image_path = images_output_path / 'mountain_320.jpeg'
 
     assert path.exists(resized_image_path) is True
     resized_image = Image.open(resized_image_path)
@@ -182,14 +186,14 @@ def test_process_image_without_format_generates_image_from_mimetype():
 
 def test_process_image_without_width_generates_images_of_300px_500px_750px():
     ImagesProcessor(
-        input=["./images/mountain.jpg"],
+        input=[images_path / "mountain.jpg"],
         formats=["jpg"],
         quality=100
     ).process()
 
-    resized_image_300_path = './images/output/mountain_300.jpeg'
-    resized_image_500_path = './images/output/mountain_500.jpeg'
-    resized_image_750_path = './images/output/mountain_750.jpeg'
+    resized_image_300_path = images_output_path / 'mountain_300.jpeg'
+    resized_image_500_path = images_output_path / 'mountain_500.jpeg'
+    resized_image_750_path = images_output_path / 'mountain_750.jpeg'
 
     # 300px width image
     assert path.exists(resized_image_300_path) is True
