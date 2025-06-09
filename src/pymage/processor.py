@@ -15,6 +15,8 @@ logger = logging.getLogger(__name__)
 
 
 class ImagesProcessor:
+
+
     def __init__(
             self,
             input: Union[str, Path, List[Union[str, Path]]],
@@ -30,6 +32,7 @@ class ImagesProcessor:
         self.images = self.__get_valid_images(input)
         self.output_dir = self.__resolve_output_dir(input, output_dir_name)
         self.__create_output_dir()
+
 
     def process(self, max_workers: int = 1):
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
@@ -50,6 +53,7 @@ class ImagesProcessor:
                     if not future.done():
                         future.cancel()
                 executor.shutdown(wait=False)
+
 
     def __process_image(self, image_path: str):
         file_name = os.path.splitext(os.path.basename(image_path))[0]
@@ -76,14 +80,17 @@ class ImagesProcessor:
 
                     resized_img.save(output_path, format=fmt.upper(), quality=self.quality)
 
+
     def __resize_image(self, image, width: int):
         w_percent = width / float(image.size[0])
         height = int(float(image.size[1]) * w_percent)
         return image.resize((width, height), resample=Image.Resampling.BICUBIC)
 
+
     def __create_output_dir(self):
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
+
 
     def __resolve_output_dir(self, input_source, output_dir_name: str) -> str:
         if isinstance(input_source, (str, Path)) and os.path.isdir(input_source):
@@ -98,6 +105,7 @@ class ImagesProcessor:
             base_dir = os.getcwd()
 
         return os.path.join(base_dir, output_dir_name)
+
 
     def __get_valid_images(self, input_source) -> List[str]:
         valid_extensions = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".tiff"}
