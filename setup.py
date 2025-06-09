@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 if __name__ == "__main__":
     setup(
         name='pymage-processor',
-        version='1.0.1',
+        version='1.1.1',
         author='Rodrigo Martins',
         description='Image processor',
         packages=find_packages(where='src', exclude=['tests']),
@@ -16,7 +16,8 @@ if __name__ == "__main__":
         install_requires=[
             'Pillow>=9.3.0',
             'altgraph>=0.17.2',
-            'tk>=0.1.0'
+            'tk>=0.1.0',
+            'tqdm'
         ],
         python_requires='>=3.8',
         zip_safe=False,
