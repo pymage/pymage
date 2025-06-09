@@ -18,8 +18,8 @@ class ImagesProcessor:
         self,
         input: Union[str, Path, List[Union[str, Path]]],
         output_dir_name: str = "output",
-        widths: List[int] = (300, 500, 750),
-        formats: List[str] = (),
+        widths: List[int] = [300, 500, 750],
+        formats: List[str] = [],
         quality: int = 100
     ):
         self.widths = widths
