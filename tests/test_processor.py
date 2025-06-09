@@ -9,6 +9,7 @@ CURRENT_DIR = Path(__file__).parent
 images_path = CURRENT_DIR / "images"
 images_output_path = CURRENT_DIR / "images/output"
 
+
 @pytest.fixture(autouse=True)
 def run_around_tests():
     # Running test
