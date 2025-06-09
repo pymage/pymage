@@ -4,6 +4,7 @@ from PIL import Image
 import pytest
 import shutil
 
+
 @pytest.fixture(autouse=True)
 def run_around_tests():
     # Running test
@@ -18,6 +19,7 @@ def run_around_tests():
 
     if path.exists('./custom_output'):
         shutil.rmtree('./custom_output')
+
 
 def test_should_save_processed_images_in_custom_output_folder():
     ImagesProcessor(
@@ -35,6 +37,7 @@ def test_should_save_processed_images_in_custom_output_folder():
     assert resized_image.size[0] == 320
     assert resized_image.get_format_mimetype() == "image/jpeg"
 
+
 def test_process_images_from_folder():
     ImagesProcessor(
         input=["./images/"],
@@ -49,6 +52,7 @@ def test_process_images_from_folder():
     assert path.exists(resized_image_path) is True
     assert resized_image.size[0] == 320
     assert resized_image.get_format_mimetype() == "image/jpeg"
+
 
 def test_process_image_one_size_same_format():
     ImagesProcessor(
