@@ -13,7 +13,7 @@ class PymageCLI:
     def __run(self):
         self.parser = argparse.ArgumentParser(
             prog="pymage",
-            usage="pymage [image_files] [-f] [-w] [-q]",
+            usage="pymage [image_files | folder] [-f] [-w] [-q] [-o]",
             epilog="Enjoy the program! :)",
             formatter_class=argparse.RawDescriptionHelpFormatter
         )
