@@ -22,7 +22,7 @@ class ImagesProcessor:
         self.output_dir = self.__resolve_output_dir(input, output_dir_name)
         self.__create_output_dir()
 
-    def process(self, max_workers: int = 4):
+    def process(self, max_workers: int = 1):
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             futures = {executor.submit(self.__process_image, image_path): image_path for image_path in self.images}
             try:
@@ -48,6 +48,9 @@ class ImagesProcessor:
 
             for width in self.widths:
                 for fmt in image_formats:
+                    # Normalize format
+                    if fmt.lower() == "jpg":
+                        fmt = "jpeg"
                     output_filename = f"{file_name}_{width}.{fmt.lower()}"
                     output_path = os.path.join(self.output_dir, output_filename)
 
