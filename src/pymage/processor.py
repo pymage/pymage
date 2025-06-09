@@ -4,14 +4,6 @@ from typing import List, Union
 from pathlib import Path
 from tqdm import tqdm
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import logging
-
-logging.basicConfig(
-    level=logging.DEBUG,  # ou INFO para menos verbosidade
-    format="%(asctime)s [%(levelname)s] %(message)s"
-)
-
-logger = logging.getLogger(__name__)
 
 
 class ImagesProcessor:
@@ -38,10 +30,8 @@ class ImagesProcessor:
             try:
                 for future in tqdm(as_completed(futures), total=len(futures), desc="Processing images"):
                     image_path = futures[future]
-                    logger.debug(f"Processing image: {image_path}")
                     try:
                         future.result()
-                        logger.debug(f"process end: {image_path}")
                     except Exception as e:
                         print(f"Error processing {image_path}: {e}")
             except KeyboardInterrupt:
@@ -75,6 +65,7 @@ class ImagesProcessor:
                     if fmt.lower() in ['jpg', 'jpeg'] and resized_img.mode != 'RGB':
                         resized_img = resized_img.convert('RGB')
 
+                    print(f" ================== Saved image: {output_path}")
                     resized_img.save(output_path, format=fmt.upper(), quality=self.quality)
 
     def __resize_image(self, image, width: int):
